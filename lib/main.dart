@@ -10,7 +10,7 @@ class WeatherApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Weather App',
+      title: 'Weather Info App',
       theme: ThemeData(primarySwatch: Colors.blue),
       home: WeatherHomePage(),
     );
@@ -51,7 +51,7 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Weather App'),
+        title: Text('Weather Info App Activity'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
