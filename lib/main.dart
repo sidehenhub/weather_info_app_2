@@ -31,7 +31,6 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
 
   void fetchWeather(String city) {
     if (city.isNotEmpty) {
-      
       int temperature = _random.nextInt(16) + 15; 
 
       
@@ -67,10 +66,13 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
               ),
             ),
             SizedBox(height: 10),
-            ElevatedButton(
+            OutlinedButton(
               onPressed: () {
                 fetchWeather(_controller.text.trim());
               },
+              style: OutlinedButton.styleFrom(
+                side: BorderSide(color: Colors.blue), 
+              ),
               child: Text('Fetch Weather'),
             ),
             SizedBox(height: 20),
