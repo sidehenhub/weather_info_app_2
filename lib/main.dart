@@ -25,8 +25,9 @@ class WeatherHomePage extends StatefulWidget {
 class _WeatherHomePageState extends State<WeatherHomePage> {
   final TextEditingController _controller = TextEditingController();
   String _weatherData = '';
+  String _forecastData = '';
 
-  
+
   final Random _random = Random();
 
   void fetchWeather(String city) {
@@ -45,6 +46,21 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
         _weatherData = 'Please enter a city name';
       });
     }
+  }
+
+  void fetchForecast() {
+    List<String> forecast = [];
+    List<String> weatherConditions = ['Sunny', 'Cloudy', 'Rainy'];
+
+    for (int i = 0; i < 7; i++) {
+      int temperature = _random.nextInt(16) + 15; 
+      String weather = weatherConditions[_random.nextInt(weatherConditions.length)];
+      forecast.add('Day ${i + 1}: Temperature: $temperature °C, Weather: $weather');
+    }
+
+    setState(() {
+      _forecastData = forecast.join('\n');
+    });
   }
 
   @override
@@ -75,10 +91,26 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
               ),
               child: Text('Fetch Weather'),
             ),
+            SizedBox(height: 10),
+            OutlinedButton(
+              onPressed: () {
+                fetchForecast();
+              },
+              style: OutlinedButton.styleFrom(
+                side: BorderSide(color: Colors.blue), 
+              ),
+              child: Text('Fetch 7-Day Forecast'),
+            ),
             SizedBox(height: 20),
             Text(
               _weatherData,
               style: TextStyle(fontSize: 18),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 20),
+            Text(
+              _forecastData,
+              style: TextStyle(fontSize: 16),
               textAlign: TextAlign.center,
             ),
           ],
