@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() {
   runApp(WeatherApp());
@@ -25,23 +26,24 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
   final TextEditingController _controller = TextEditingController();
   String _weatherData = '';
 
-
-  Map<String, String> mockWeatherData = {
-    'Paris': 'Temperature: 35 °C\nWeather: Clear Sky',
-    'Dallas': 'Temperature: 20 °C\nWeather: Light Rain',
-    'Houston': 'Temperature: 45 °C\nWeather: Sunny',
-    'Cupertino': 'Temperature: 15 °C\nWeather: Light Rain',
-  };
+  
+  final Random _random = Random();
 
   void fetchWeather(String city) {
-    
-    if (mockWeatherData.containsKey(city)) {
+    if (city.isNotEmpty) {
+      
+      int temperature = _random.nextInt(16) + 15; 
+
+      
+      List<String> weatherConditions = ['Sunny', 'Cloudy', 'Rainy'];
+      String weather = weatherConditions[_random.nextInt(weatherConditions.length)];
+
       setState(() {
-        _weatherData = mockWeatherData[city]!;
+        _weatherData = 'City: $city\nTemperature: $temperature °C\nWeather: $weather';
       });
     } else {
       setState(() {
-        _weatherData = 'City not found';
+        _weatherData = 'Please enter a city name';
       });
     }
   }
